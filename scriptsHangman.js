@@ -22,6 +22,7 @@ var scaffoldCanvas = [[' ', '|', '_', '_', '_', '_', ' '],
 
 var guessWordArr = [] 
 var compareWordArr = []
+var keyboardDisbleArr = []
 
 const keyboardTotalKeys = 26
 
@@ -170,13 +171,14 @@ function playTheGameFunction(event) {
                 if (gameWon === false) {
                     if (numberOfLives === 0) {
                         document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of lives. The guess is ${currentWord}`
-                        
+                        gameKeyboardReset() 
                     } else {
                         document.querySelector('#gameDisplay').innerHTML = `You have ${numberOfGuess} guesses and ${numberOfLives} lives remaining.`
                     }
                 }               
             } else {
                 document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of guesses. The guess is ${currentWord}`
+                gameKeyboardReset() 
             }
         }
 
@@ -261,6 +263,7 @@ function gameOverWin() {
     console.log('GameOverWin')
     document.querySelector('#gameDisplay').innerHTML = 'Congratulations! You have won the game.'
     gameWon = true
+    gameKeyboardReset() 
 }
 
 function updateScaffold() {
@@ -282,6 +285,29 @@ function updateScaffold() {
     } else if (numberOfMissedGuess === 8) {
         document.querySelector('#scaffold56').innerHTML = '\\'
     } 
+}
+
+function gameKeyboardReset() {
+    keyboardDisbleArr = document.querySelectorAll('.gameKeys')
+    console.log(this)
+    console.log('guessWordArr', guessWordArr)
+    console.log(' keyboardDisbleArr',  keyboardDisbleArr)
+    keyboardDisbleArr.forEach(function checkMatch(cmatchEl, cmatchIndex, cmatchArr) {
+        let matchArrElement = false
+        for (let k = 0; k < guessWordArr.length; k++) {
+            if (cmatchEl === guessWordArr[k]) {
+                matchArrElement = true
+            } 
+        }
+        console.log('matchValue', matchArrElement)
+ //       console.log('matchEl', cmatchEl)
+        if (matchArrElement === false) {
+            cmatchEl.style.color = 'rgb(183, 163, 163)'
+            cmatchEl.style.border = '2px solid rgb(183, 163, 163)' 
+            cmatchEl.removeEventListener('click',playTheGameFunction)
+        }
+    });
+ 
 }
 
 // function onPressLetter() {

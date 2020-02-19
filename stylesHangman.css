@@ -40,10 +40,11 @@ header {
 }
 
 .keyboardKey {
-    background-color: rgb(192, 192, 192);
+    /* background-color: rgb(192, 192, 192); */
+    background-color: rgb(255, 255, 255);
     grid-column: 1 span 3;
    
-    border: 2px solid rgb(0, 0, 0);;
+    border: 0px solid rgb(0, 0, 0);;
     padding: 0px;
     text-align: center;
     /* margin: 10px; */
@@ -78,22 +79,6 @@ header {
 
 }
 
-.keyRows1 {
-  
-}
-
-.keyRows2 {
-    
-}
-
-.keyRows3 {
-    
-}
-
-.keyRows4 {
-   
-}
-
 /* .keyRowsZero {
     background-color: white;
     grid-column: 1 span 3;
@@ -111,6 +96,7 @@ header {
     margin: 10px;
     margin-right: 60px;
     grid-column: 1 span 1;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #resetBtn {
@@ -122,6 +108,7 @@ header {
     margin: 10px;
     margin-left: 60px;
     grid-column: 3 span 1;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .hangingArea {
