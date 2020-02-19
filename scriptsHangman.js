@@ -93,6 +93,10 @@ function onPressStart() {
     const onStartHangingArea = document.querySelectorAll('.scafoldPiece')
     console.log(onStartHangingArea)
 
+    var gameSound = document.querySelector('#hangmanSound')
+
+    gameSound.play()
+
     generateRandomWord()
     // divNodeKB.addEventListener("click", onPressLetter)
     // Activate keyboard keys 
@@ -178,7 +182,9 @@ function playTheGameFunction(event) {
                     }
                 }               
             } else {
-                document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of guesses. The guess is ${currentWord}`
+                if (compareMatch !== true) {
+                    document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of guesses. The guess is ${currentWord}`
+                }
                 gameKeyboardReset() 
             }
         }
