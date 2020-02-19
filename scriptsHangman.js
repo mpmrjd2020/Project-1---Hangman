@@ -123,7 +123,8 @@ function onPressStart() {
     onStartGameDisplay.style.border = '2px solid rgb(0, 0, 0)'
     onStartGameDisplay.style.color = 'rgb(0, 0, 0)'
 
-    alert("Please guess the name of a city in the state of iowa.");
+ //   alert('Please guess the name of a city in the state of iowa.');
+    document.querySelector('#gameDisplay').innerHTML = `Please guess the name of a city in the state of Iowa. You have ${numberOfGuess} guesses.`
 
     this.removeEventListener("click", onPressStart)
 }
@@ -199,7 +200,7 @@ function activatePlayAgain(event) {
 //    console.log('Iam in play again' + this)
     const pressPlayAgain = document.querySelector('#resetBtn')
     pressPlayAgain.style.color = 'rgb(0, 0, 0)' 
-    pressPlayAgain.style.background = 'rgb(192, 192, 192'
+    pressPlayAgain.style.background = 'rgb(206, 206, 156)'
     pressPlayAgain.style.border = '2px solid rgb(0, 0, 0)'  
     pressPlayAgain.addEventListener("click", () => {
 //        console.log('Enabling reset button')
