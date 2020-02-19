@@ -63,6 +63,21 @@ header {
     size:25px;
 }
 
+.scafoldPiece {
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    border: 0px solid rgb(183, 163, 163);
+    color: rgb(183, 163, 163);
+    height: 20px;
+    width: 20px;
+    border-radius: 2;
+    margin: 10px; 
+    text-align: center;
+    /* text-decoration: underline line-through; */
+    size:25px;
+
+}
+
 .keyRows1 {
   
 }
@@ -110,21 +125,24 @@ header {
 }
 
 .hangingArea {
-    background-color: RGB(245,245,220);
+    /* background-color: RGB(245,245,220); */
+    background-color: RGB(255,255,255);
     grid-column: 1 span 3;
     width: 450px;
-    border: 2px solid green;
-    padding: 20px;
-    margin: 10px;
+    border: 0px solid green;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
 }
 
 #gameDisplay {
-    background-color:  rgb(192, 192, 192);;
+    background-color:  rgb(249, 250, 245);
     grid-column: 1 span 3;
     width: 450px;
-    border: 2px solid green;
+    border: 2px solid rgb(183, 163, 163);
     padding: 20px;
-    margin: 10px;    
+    margin: 10px;  
+    text-align: center;  
 }
 
 footer {
