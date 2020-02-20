@@ -30,9 +30,9 @@ header {
 .guessWordIn {
     background-color:rgb(249, 250, 245);
     grid-column: 1 / span 3;
-    width: 450px;
+    width: 500px;
     border: 2px solid rgb(183, 163, 163);
-    padding: 20px;
+    padding: 20PX;
     margin: 10px;
     text-align: center;
 }
@@ -100,7 +100,7 @@ header {
     border: 2px solid rgb(183, 163, 163);
     padding: 12px;
     margin: 10px;
-    margin-left: 60px;
+    margin-left: 120px;
     grid-column: 3 / span 1;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
