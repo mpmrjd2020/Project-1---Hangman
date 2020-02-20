@@ -10,6 +10,8 @@
     <div class="hangman-page">
         <header class="g-element gameHeader">
             <h1>Hangman</h1>
+            <h4 class="keepscore gameScore"> Highest Score: 0 min. 0 sec.</h4>
+            <h4 class="keepscore playerScore"> Player Score: 0 min. 0 sec.</h4>
         </header>
         <section class="g-element gameInput">
             <div class="guessWordIn"></div>
@@ -17,8 +19,6 @@
             <div class="keyboardKey keyRows2"></div>
             <div class="keyboardKey keyRows3"></div>
             <div class="keyboardKey keyRows4"></div>
-            <!-- <div class="keyboardKey keyRowsFive"></div>
-            <div class="keyboardKey keyRowsSix"></div> -->
             <button id="startBtn" type="button">Start</button>
             <button id="resetBtn" type="button">Play Again</button>
         </section>
@@ -36,8 +36,8 @@
         <footer class="g-element">
             <p>&copy;2020 MPM</p>
         </footer>
-        <audio id='hangmanSound'>
-            <source src='http://www.rosswalker.co.uk/movie_sounds/sounds_files_20150201_1096714/good_bad_and_the_ugly/good_bad_ugly.wav' type='audio/wav'>
+        <audio id="hangmanSound">
+            <source src="http://www.rosswalker.co.uk/movie_sounds/sounds_files_20150201_1096714/good_bad_and_the_ugly/good_bad_ugly.wav" type="audio/wav">
         </audio>
         
     </div>

@@ -40,11 +40,22 @@ var numberOfLives = 8
 var compareMatch = false
 var gameWon = false
 
+var timeGmStart = 0
+var timeGmFinish = 0
+var timeGameDuration = 0
+var timeGameMinute = 0
+var timeGameSecond = 0
+var highestScoreDisplay = 0
+var highestGameScore = 0
+var highestGameSecond = 0
+
+
 main()
 
 function main() {
     buildKeyboard()
     buildScafold()
+    getDisplayHighestScore()
     pressStart.addEventListener("click", onPressStart)
 }
 
@@ -53,14 +64,10 @@ function main() {
 */
 function buildKeyboard() {
     keyboardArr.forEach(function(element,index,kbArr) {
-//        console.log(element)
         const arrKBLen = element.length
         letterArray = element
-//        console.log(arrKBLen)
         for (let i = 0; i < arrKBLen; i++) {
             const appendKeyNode = document.querySelector(`.keyRows${index+1}`)
-//            console.log(`.keyRows${index+1}`)
-//            console.log(appendKeyNode)
             var divNodeKB = document.createElement("DIV")
             divNodeKB.setAttribute("class", "gameKeys")
             divNodeKB.setAttribute("id", `keys${letterArray[i]}`)
@@ -89,6 +96,9 @@ function buildScafold() {
     })
 }
 
+/*
+*   Pressing the start button activate the gameboard
+*/
 function onPressStart() {
     const onStartHangingArea = document.querySelectorAll('.scafoldPiece')
     console.log(onStartHangingArea)
@@ -98,20 +108,20 @@ function onPressStart() {
     gameSound.play()
 
     generateRandomWord()
-    // divNodeKB.addEventListener("click", onPressLetter)
-    // Activate keyboard keys 
-//    console.log('I am in the OnPressStart button')
-//    console.log(this)
+
     const activateKeysArray = document.querySelectorAll('.gameKeys')
-//    console.log(activateKeysArray)
+
     activateKeysArray.forEach(elem => {
         elem.addEventListener('click', playTheGameFunction)
         elem.style.color = 'rgb(0,0,0)'
         elem.style.border = '2px solid rgb(0, 0, 0)' 
     })
-    //Activate reset button
+
     activatePlayAgain()
-//   console.log(`Setting up style for input screen ${guessLetterIn}`)
+
+/*
+*   Setting up the style of various elements when the gameboard is activated
+*/ 
     guessLetterIn.style.border = '2px solid rgb(0, 0, 0)'
     guessLetterIn.style.background = 'rgb(255, 255, 255)'
    
@@ -127,19 +137,23 @@ function onPressStart() {
     onStartGameDisplay.style.border = '2px solid rgb(0, 0, 0)'
     onStartGameDisplay.style.color = 'rgb(0, 0, 0)'
 
- //   alert('Please guess the name of a city in the state of iowa.');
     document.querySelector('#gameDisplay').innerHTML = `Please guess the name of a city in the state of Iowa. You have ${numberOfGuess} guesses.`
 
     this.removeEventListener("click", onPressStart)
+
+/*
+*   Getting the game starting time to start tracking the user time to completing the game.
+*/
+    timeGmStart = Date.now()
+ 
 }
 
+/*
+*   Function with main game logic
+*/
 function playTheGameFunction(event) {
-    console.log(this)
-//    let elKey = `${event.target.id}`
     let elKey = `${this.textContent}`
-    console.log(`This is ${elKey}`)
-    console.log(currentWord)
-    // let currWord = currentWord.toLowerCase()
+
     let compareWordArr = currentWord.toLowerCase().split(''); 
     console.log('Array in play game', compareWordArr)
     console.log(`This first value ${this.textContent}`)
@@ -158,49 +172,43 @@ function playTheGameFunction(event) {
             evaluateGameResult()
             compareMatch = true
             } 
-        if ((indexCompare + 1) === currentWord.length) {
-            console.log('indexCompare ' + indexCompare)
-            if (numberOfGuess !== 0) {      
-                if (compareMatch === false) {
-                    console.log('compareMatch f ' + compareMatch )
-                    numberOfMissedGuess += 1
-                    console.log('numberOfMissedGuess' + numberOfMissedGuess)
-                    numberOfLives -= 1
-                    console.log('numberOfLives' + numberOfLives)
-                    updateScaffold()
- 
-                } else {
-                    console.log('compareMatch t ' + compareMatch )
-                    compareMatch = false
-                }
-                if (gameWon === false) {
-                    if (numberOfLives === 0) {
-                        document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of lives. The guess is ${currentWord}`
-                        gameKeyboardReset() 
+        if (gameWon === false) {
+            if ((indexCompare + 1) === currentWord.length) {
+                if (numberOfGuess !== 0) {      
+                    if (compareMatch === false) {
+                        numberOfMissedGuess += 1
+                        console.log('numberOfMissedGuess' + numberOfMissedGuess)
+                        numberOfLives -= 1
+                        console.log('numberOfLives' + numberOfLives)
+                        updateScaffold()    
                     } else {
-                        document.querySelector('#gameDisplay').innerHTML = `You have ${numberOfGuess} guesses and ${numberOfLives} lives remaining.`
-                    }
-                }               
-            } else {
-                if (compareMatch !== true) {
-                    document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of guesses. The guess is ${currentWord}`
+                        console.log('compareMatch t ' + compareMatch )
+                        compareMatch = false
+                    }                   
+                        if (numberOfLives === 0) {
+                            document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of lives. The guess is ${currentWord}`
+                            gameKeyboardReset() 
+                        } else {
+                            document.querySelector('#gameDisplay').innerHTML = `You have ${numberOfGuess} guesses and ${numberOfLives} lives remaining.`
+                        }                                 
+                } else {
+                        document.querySelector('#gameDisplay').innerHTML = `Game over! You are out of guesses. The guess is ${currentWord}`                   
+                    gameKeyboardReset() 
                 }
-                gameKeyboardReset() 
             }
         }
 
-        } )
+    } )
 
-        console.log(`Value of ${elKey}`)
+    console.log(`Value of ${elKey}`)
     console.log(`The new compare array ${guessWordArr}`)
- //   evaluateGameResult()
-    
+ 
 //    console.log("Press start working, activating key board")
     this.style.color = 'rgb(183, 163, 163)'
     this.style.border = '2px solid rgb(183, 163, 163)' 
 
     this.removeEventListener('click',playTheGameFunction)
-    }
+}
 
 function activatePlayAgain(event) {
 //    console.log('Iam in play again' + this)
@@ -211,9 +219,6 @@ function activatePlayAgain(event) {
     pressPlayAgain.addEventListener("click", () => {
 //        console.log('Enabling reset button')
         window.location.reload(true)
-        // buildKeyboard()
-        // console.log('Disabling reset button')
-        // this.removeEventListener('click',activatePlayAgain)
     })
 }
 
@@ -256,7 +261,6 @@ function evaluateGameResult() {
             removeBlank.push(remArr[remIndex]) 
         }
     })
-//    removeBlank = ctrial.filter( (ctrialEl) => { ctrialEl !== ' '})
     console.log('removeBlamk', removeBlank)
     console.log(guessWordArr.length)
     console.log(removeBlank.length)
@@ -270,6 +274,8 @@ function gameOverWin() {
     console.log('GameOverWin')
     document.querySelector('#gameDisplay').innerHTML = 'Congratulations! You have won the game.'
     gameWon = true
+    calculateGameDuration()
+    determineStoreHighestScore()
     gameKeyboardReset() 
 }
 
@@ -315,6 +321,42 @@ function gameKeyboardReset() {
         }
     });
  
+}
+
+function calculateGameDuration() {
+    timeGmFinish = Date.now()
+    timeGameDuration = timeGmFinish - timeGmStart
+    timeGameMinute = timeGameDuration / 60000
+    console.log(timeGameMinute)
+    timeGameSecond = Math.ceil((timeGameMinute - Math.trunc(timeGameMinute)) * 60)
+
+    timeDisplayMinute = Math.trunc(timeGameMinute)
+    console.log(Math.trunc(timeGameMinute))
+    console.log('timeGmFinish', timeGmFinish)
+    document.querySelector('.playerScore').innerHTML = `Player score: ${timeDisplayMinute} min. ${timeGameSecond} sec.`
+}
+
+function getDisplayHighestScore() {
+    highestGameScore = parseFloat(localStorage.getItem('highestScore'))
+    console.log('getDisplayHighestScore', highestGameScore)
+    if (isNaN(highestGameScore)) {
+        highestGameScore = 0
+    }
+    highestGameSecond = Math.ceil((highestGameScore - Math.trunc(highestGameScore)) * 60)
+    highestScoreDisplay = Math.trunc(highestGameScore)
+    document.querySelector('.gameScore').innerHTML = `Highest Score: ${highestScoreDisplay} min. ${highestGameSecond} sec.`  
+}
+
+function determineStoreHighestScore() {
+    console.log('highestGameScore ', highestGameScore)
+    console.log('timeGameMinute ', timeGameMinute)
+    console.log('timeDisplayMinute', timeDisplayMinute)
+    console.log('timeGameSecond' , timeGameSecond)
+    if (highestGameScore > timeGameMinute) {
+        localStorage.removeItem('highestScore')
+        localStorage.setItem('highestScore', timeGameMinute)
+        document.querySelector('.gameScore').innerHTML = `Player score: ${timeDisplayMinute} min. ${timeGameSecond} sec.` 
+    }
 }
 
 // function onPressLetter() {
