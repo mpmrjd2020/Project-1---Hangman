@@ -6,9 +6,9 @@ The highest completion time for a game is kept for users to best it over time.
 
 ## WIREFRAME:
 
-[Cities of Iowa Hangman](https://wireframe.cc/J76Fnp]
+[Cities of Iowa Hangman](https://wireframe.cc/J76Fnp)
 
-
+![Hangman Wireframe](/blob/master/Pictures/Hangman%20Screen%20Shot%20%202020-02-20%20at%203.16.28%20PM.png)
 
 ## TECHNOLOGY USED:
 
