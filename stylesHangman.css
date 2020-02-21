@@ -84,7 +84,7 @@ header {
 
 #startBtn {
     background-color: rgb(206, 206, 156);
-    width: 180px;
+    width: 170px;
     border: 2px solid rgb(0, 0, 0);
     padding: 12px;
     margin: 10px;
@@ -95,14 +95,34 @@ header {
 
 #resetBtn {
     background-color: rgb(249, 250, 245);
-    width: 180px;
+    width: 170px;
     color: rgb(183, 163, 163);
     border: 2px solid rgb(183, 163, 163);
     padding: 12px;
     margin: 10px;
-    margin-left: 120px;
+    margin-left:140px;
     grid-column: 3 / span 1;
     font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#userWord {
+    border: 2px solid rgb(0, 0, 0);
+    Height: 36px;
+    width: 170px;
+}
+
+#submitBtn {
+    background-color: rgb(206, 206, 156);
+    width: 170px;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 12px;
+    margin: 10px;
+    grid-column: 2 / span 1;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.inputArea {
+    text-align: center;
 }
 
 .hangingArea {

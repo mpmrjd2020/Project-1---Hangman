@@ -27,6 +27,7 @@ var keyboardDisbleArr = []
 const keyboardTotalKeys = 26
 
 const pressStart = document.querySelector('#startBtn')
+const submitButton = document.querySelector('#submitBtn')
 const guessLetterIn = document.querySelector('.guessWordIn')
 const onStartGameDisplay = document.querySelector('#gameDisplay')
 
@@ -55,6 +56,7 @@ function main() {
     buildScafold()
     getDisplayHighestScore()
     pressStart.addEventListener("click", onPressStart)
+    submitButton.addEventListener("click", onSubmit)
 }
 
 /* 
@@ -98,16 +100,25 @@ function buildScafold() {
 *   Pressing the start button activate the gameboard
 */
 function onPressStart() {
-    const onStartHangingArea = document.querySelectorAll('.scafoldPiece')
-
     var gameSound = document.querySelector('#hangmanSound')
 
-    gameSound.play()
+//    gameSound.play()
 
     generateRandomWord()
+    deactivateSubmit()
 
+    processGameChoice() 
+}
+
+function onSubmit() {
+    deactivateStart()
+    processGameChoice() 
+
+}
+
+function processGameChoice() {
+    const onStartHangingArea = document.querySelectorAll('.scafoldPiece')
     const activateKeysArray = document.querySelectorAll('.gameKeys')
-
     activateKeysArray.forEach(elem => {
         elem.addEventListener('click', playTheGameFunction)
         elem.style.color = 'rgb(0,0,0)'
@@ -115,8 +126,7 @@ function onPressStart() {
     })
 
     activatePlayAgain()
-
-/*
+ /*
 *   Setting up the style of various elements when the gameboard is activated
 */ 
     guessLetterIn.style.border = '2px solid rgb(0, 0, 0)'
@@ -205,6 +215,7 @@ function playTheGameFunction(event) {
 */
 
 function activatePlayAgain(event) {
+    console.log('activatePlayAgain ')
     const pressPlayAgain = document.querySelector('#resetBtn')
     pressPlayAgain.style.color = 'rgb(0, 0, 0)' 
     pressPlayAgain.style.background = 'rgb(206, 206, 156)'
@@ -214,6 +225,22 @@ function activatePlayAgain(event) {
     })
 }
 
+function deactivateSubmit() {
+    console.log('deactivate submit')
+    submitButton.removeEventListener('click',playTheGameFunction)
+    submitButton.style.color = 'rgb(183, 163, 163)'
+    submitButton.style.border = '2px solid rgb(183, 163, 163)' 
+
+    userWord.style.color = 'rgb(183, 163, 163)'
+    userWord.style.border = '2px solid rgb(183, 163, 163)' 
+}
+
+function deactivateStart() {
+    console.log('deactivate start')
+    pressStart.removeEventListener('click',playTheGameFunction)
+    pressStart.style.color = 'rgb(183, 163, 163)'
+    pressStart.style.border = '2px solid rgb(183, 163, 163)' 
+}
 /*
 *   Random city generation
 */
