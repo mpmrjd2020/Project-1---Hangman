@@ -7,7 +7,7 @@ Users get 8 guesses if a word lenght is 5 or the length of the word plus 3 if th
 
 ## Wireframe:
 
-[Cities of Iowa Hangman](https://wireframe.cc/J76Fnp)
+[Cities of Iowa Hangman Link](https://wireframe.cc/J76Fnp)
 
 ![Hangman Wireframe](/Pictures/Hangman%20Screen%20Shot%20%202020-02-20%20at%203.16.28%20PM.png)
 
