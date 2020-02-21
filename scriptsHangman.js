@@ -57,6 +57,7 @@ function main() {
     getDisplayHighestScore()
     pressStart.addEventListener("click", onPressStart)
     submitButton.addEventListener("click", onSubmit)
+    document.querySelector('#gameDisplay').innerHTML = `Please select the 'Random City' button to have a city generated for you. Or enter a city and submit for a friend to play.`
 }
 
 /* 
@@ -106,11 +107,11 @@ function onPressStart() {
 
     generateRandomWord()
     deactivateSubmit()
-
     processGameChoice() 
 }
 
 function onSubmit() {
+    captureUserEntry()
     deactivateStart()
     processGameChoice() 
 
@@ -132,9 +133,15 @@ function processGameChoice() {
     guessLetterIn.style.border = '2px solid rgb(0, 0, 0)'
     guessLetterIn.style.background = 'rgb(255, 255, 255)'
    
-    pressStart.style.background = 'rgb(249, 250, 245)'
-    pressStart.style.color = 'rgb(183, 163, 163)'
-    pressStart.style.border = '2px solid rgb(183, 163, 163)' 
+    // pressStart.style.background = 'rgb(249, 250, 245)'
+    // pressStart.style.color = 'rgb(183, 163, 163)'
+    // pressStart.style.border = '2px solid rgb(183, 163, 163)' 
+
+    // submitButton.style.color = 'rgb(183, 163, 163)'
+    // submitButton.style.border = '2px solid rgb(183, 163, 163)' 
+
+    // userWord.style.color = 'rgb(183, 163, 163)'
+    // userWord.style.border = '2px solid rgb(183, 163, 163)' 
     
 
     onStartHangingArea.forEach(function(hangElem, hangIndex, hangArr) {
@@ -146,7 +153,11 @@ function processGameChoice() {
 
     document.querySelector('#gameDisplay').innerHTML = `Please guess the name of a city in the state of Iowa. You have ${numberOfGuess} guesses.`
 
-    this.removeEventListener("click", onPressStart)
+//    this.removeEventListener("click", onPressStart)
+//    this.removeEventListener("click", onSubmit)
+    deactivateSubmit()
+    deactivateStart()
+
 
 /*
 *   Getting the game starting time to start tracking the user time to completing the game.
@@ -227,19 +238,26 @@ function activatePlayAgain(event) {
 
 function deactivateSubmit() {
     console.log('deactivate submit')
-    submitButton.removeEventListener('click',playTheGameFunction)
+    console.log(this)
     submitButton.style.color = 'rgb(183, 163, 163)'
     submitButton.style.border = '2px solid rgb(183, 163, 163)' 
+    submitButton.style.background = 'rgb(249, 250, 245)'
+    submitButton.disabled = true
 
     userWord.style.color = 'rgb(183, 163, 163)'
     userWord.style.border = '2px solid rgb(183, 163, 163)' 
+    userWord.value = ''
+    userWord.disabled = true
 }
 
 function deactivateStart() {
     console.log('deactivate start')
-    pressStart.removeEventListener('click',playTheGameFunction)
+    console.log(this)
     pressStart.style.color = 'rgb(183, 163, 163)'
     pressStart.style.border = '2px solid rgb(183, 163, 163)' 
+    pressStart.style.background = 'rgb(249, 250, 245)'
+    pressStart.disabled = true
+
 }
 /*
 *   Random city generation
@@ -247,6 +265,21 @@ function deactivateStart() {
 function generateRandomWord() {
     const indexRdArr = Math.floor(Math.random() * randomWordArray.length)
     currentWord = randomWordArray[indexRdArr]
+    guessWordPrompt() 
+}
+
+function captureUserEntry() {
+    currentWord = document.querySelector('#userWord').value
+    if (currentWord.length === 0) {
+        alert('Please enter the name of a city!')
+        window.location.reload(true)
+    } else {
+    console.log(currentWord)
+    guessWordPrompt() 
+    }
+}
+
+function guessWordPrompt() {    
     let currentWordArr = currentWord.toLowerCase().split('');
     const currentWordArrLen = currentWordArr.length
     currentWordArr.forEach(function(currElem, currIndex, currWarr){
@@ -266,6 +299,7 @@ function generateRandomWord() {
         numberOfGuess = currentWordArrLen + 3
     }
 } 
+
 
 /*
 *   Determine winner
