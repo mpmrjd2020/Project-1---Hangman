@@ -11,6 +11,8 @@ Users get 8 guesses if a word lenght is 5 or the length of the word plus 3 if th
 
 ![Hangman Wireframe](/Pictures/Hangman%20Screen%20Shot%20%202020-02-20%20at%203.16.28%20PM.png)
 
+![Hangman Initial Screen Shot](/Pictures/Hangman%20Onload%20Screen%20Shot%202020-02-21%20at%208.01.12%20AM.png)
+
 ## Technology Used:
 
 * Development: HTML, CSS and JavaScript
