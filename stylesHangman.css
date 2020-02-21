@@ -47,11 +47,9 @@ header {
 }
 
 .keyboardKey {
-    /* background-color: rgb(192, 192, 192); */
     background-color: rgb(255, 255, 255);
-    grid-column: 1 / span 3;
-   
-    border: 0px solid rgb(0, 0, 0);;
+    grid-column: 1 / span 3;  
+    border: 0px solid rgb(0, 0, 0);
     padding: 0px;
     text-align: center;
 } 
@@ -126,13 +124,10 @@ header {
 }
 
 .hangingArea {
-    /* background-color: RGB(245,245,220); */
     background-color: RGB(255,255,255);
     grid-column: 1 / span 3;
     width: 450px;
-    border: 0px solid green;
-    padding: 0px;
-    margin: 0px;
+
     text-align: center;
 }
 

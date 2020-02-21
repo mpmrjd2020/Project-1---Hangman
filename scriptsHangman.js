@@ -57,7 +57,7 @@ function main() {
     getDisplayHighestScore()
     pressStart.addEventListener("click", onPressStart)
     submitButton.addEventListener("click", onSubmit)
-    document.querySelector('#gameDisplay').innerHTML = `Please select the 'Random City' button to have a city generated for you. Or enter a city and submit for a friend to play.`
+    document.querySelector('#gameDisplay').innerHTML = `Please select the 'Random City' button to have the name of a city in Iowa generated for you. Or enter a word and submit for a friend to play.`
 }
 
 /* 
@@ -98,25 +98,34 @@ function buildScafold() {
 }
 
 /*
-*   Pressing the start button activate the gameboard
+*   Pressing the start button activate the gameboard with a ramdom guess
 */
 function onPressStart() {
-    var gameSound = document.querySelector('#hangmanSound')
-
-//    gameSound.play()
-
+    playSound()
     generateRandomWord()
     deactivateSubmit()
     processGameChoice() 
 }
 
+/*
+*   Pressing the submit button to activate the gameboard with a user provided guess
+*/
 function onSubmit() {
     captureUserEntry()
+    playSound()
     deactivateStart()
     processGameChoice() 
 
 }
 
+function playSound() {
+    var gameSound = document.querySelector('#hangmanSound')
+    gameSound.play()
+}
+
+/*
+*   Activate keyboard
+*/
 function processGameChoice() {
     const onStartHangingArea = document.querySelectorAll('.scafoldPiece')
     const activateKeysArray = document.querySelectorAll('.gameKeys')
@@ -127,22 +136,11 @@ function processGameChoice() {
     })
 
     activatePlayAgain()
- /*
+/*
 *   Setting up the style of various elements when the gameboard is activated
 */ 
     guessLetterIn.style.border = '2px solid rgb(0, 0, 0)'
     guessLetterIn.style.background = 'rgb(255, 255, 255)'
-   
-    // pressStart.style.background = 'rgb(249, 250, 245)'
-    // pressStart.style.color = 'rgb(183, 163, 163)'
-    // pressStart.style.border = '2px solid rgb(183, 163, 163)' 
-
-    // submitButton.style.color = 'rgb(183, 163, 163)'
-    // submitButton.style.border = '2px solid rgb(183, 163, 163)' 
-
-    // userWord.style.color = 'rgb(183, 163, 163)'
-    // userWord.style.border = '2px solid rgb(183, 163, 163)' 
-    
 
     onStartHangingArea.forEach(function(hangElem, hangIndex, hangArr) {
         hangElem.style.color = 'rgb(0, 0, 0)'
@@ -268,6 +266,9 @@ function generateRandomWord() {
     guessWordPrompt() 
 }
 
+/*
+*   Capture user guess
+*/
 function captureUserEntry() {
     currentWord = document.querySelector('#userWord').value
     if (currentWord.length === 0) {
@@ -279,6 +280,9 @@ function captureUserEntry() {
     }
 }
 
+/*
+*   Display logic for word to be guessed
+*/
 function guessWordPrompt() {    
     let currentWordArr = currentWord.toLowerCase().split('');
     const currentWordArrLen = currentWordArr.length
@@ -374,6 +378,9 @@ function gameKeyboardReset() {
  
 }
 
+/*
+*   Game scoring logic
+*/
 function calculateGameDuration() {
     timeGmFinish = Date.now()
     timeGameDuration = timeGmFinish - timeGmStart
